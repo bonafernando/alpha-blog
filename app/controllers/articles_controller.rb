@@ -28,6 +28,9 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user = current_user
+    params[:article][:custom_fields].each do |k,v|
+      @article.custom_fields[k] = v
+    end
     if @article.save
       flash[:success] = 'Article was successfully created.'
       redirect_to article_path(@article)
@@ -39,6 +42,10 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    @article.user = current_user
+    params[:article][:custom_fields].each do |k,v|
+      @article.custom_fields[k] = v
+    end
     if @article.update(article_params)
       flash[:success] = 'Article was successfully updated.'
       redirect_to article_path(@article)

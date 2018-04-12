@@ -28,6 +28,16 @@
           </div>
         </div>
       </div>
+      <%= f.fields_for(:custom_fields) do |builder|  %>
+        <div class="form-group">
+          <div class="control-label col-sm-2">
+            <%= builder.label :teste %>
+          </div>
+          <div class="col-sm-8">
+            <%= builder.text_field :teste, rows: 10, class: "form-control" %>
+          </div>
+        </div>
+      <% end %>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
           <%= f.submit class: 'btn btn-primary btn-lg' %>
