@@ -11,12 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227112449) do
+ActiveRecord::Schema.define(version: 20180412163356) do
 
   create_table "article_categories", force: :cascade do |t|
     t.integer "article_id"
     t.integer "category_id"
   end
+
+  create_table "article_custom_fields", force: :cascade do |t|
+    t.integer  "article_id",                null: false
+    t.string   "entry_key",                 null: false
+    t.text     "value",                     null: false
+    t.integer  "value_type",                null: false
+    t.boolean  "symbol_key", default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "article_custom_fields", ["article_id"], name: "index_article_custom_fields_on_article_id"
+  add_index "article_custom_fields", ["entry_key"], name: "index_article_custom_fields_on_entry_key"
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
